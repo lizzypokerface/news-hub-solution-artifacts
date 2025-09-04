@@ -6,7 +6,7 @@ authors = [
     {name = "Lizzy Poker Face",email = "165659964+lizzypokerface@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13,<4.0"
 dependencies = [
     "pre-commit (>=4.3.0,<5.0.0)",
     "google-api-python-client (>=2.181.0,<3.0.0)",
@@ -14,7 +14,10 @@ dependencies = [
     "feedparser (>=6.0.11,<7.0.0)",
     "requests (>=2.32.5,<3.0.0)",
     "beautifulsoup4 (>=4.13.5,<5.0.0)",
-    "ollama (>=0.5.3,<0.6.0)"
+    "ollama (>=0.5.3,<0.6.0)",
+    "selenium (>=4.35.0,<5.0.0)",
+    "langchain-community (>=0.3.29,<0.4.0)",
+    "webdriver-manager (>=4.0.2,<5.0.0)"
 ]
 
 [tool.poetry.group.dev.dependencies]

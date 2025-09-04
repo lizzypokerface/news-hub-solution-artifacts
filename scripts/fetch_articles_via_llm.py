@@ -1,199 +1,287 @@
-import requests
-from bs4 import BeautifulSoup  # Still useful for potential pre-processing of HTML
+import re
+import time
 from datetime import datetime, timedelta, timezone
-import json
-import ollama  # Import the ollama client library
+from dateutil import parser as date_parser
+from urllib.parse import urljoin
 
-# --- Configuration for Ollama ---
-OLLAMA_HOST = "http://localhost:11434"  # Default Ollama host
-OLLAMA_MODEL = (
-    "llama2"  # Or 'llama3', 'mistral', etc., depending on what you have pulled
-)
+# Selenium imports
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException, WebDriverException
+
+# BeautifulSoup for cleaning the HTML after Selenium gets it
+from bs4 import BeautifulSoup
+
+# LangChain and Ollama imports
+from langchain_community.llms import Ollama
+from langchain_core.prompts import ChatPromptTemplate
 
 
-# --- Helper to truncate HTML for LLM context window ---
-def _truncate_html(html_content, max_chars=30000):
+def _normalize_date(date_string):
     """
-    Truncates HTML content to a maximum number of characters.
-    LLMs have token limits, and raw HTML can be very verbose.
-    A more sophisticated approach might use BeautifulSoup to extract relevant sections.
+    Normalizes various date strings into a datetime object.
+    Returns datetime_object or None if parsing fails.
     """
-    if len(html_content) > max_chars:
-        print(
-            f"    -  Warning: HTML content is large ({len(html_content)} chars). Truncating to {max_chars} chars."
+    now = datetime.now(timezone.utc)  # Use UTC for consistency
+
+    # Handle relative dates first
+    date_string_lower = date_string.lower()
+    if "today" in date_string_lower:
+        return now.replace(hour=0, minute=0, second=0, microsecond=0)
+    elif "yesterday" in date_string_lower:
+        return (now - timedelta(days=1)).replace(
+            hour=0, minute=0, second=0, microsecond=0
         )
-        # Try to truncate at a natural break, like after a closing tag, if possible
-        truncated = html_content[:max_chars]
-        last_tag_end = truncated.rfind(">")
-        if last_tag_end != -1:
-            return truncated[: last_tag_end + 1]
-        return truncated
-    return html_content
+    elif "ago" in date_string_lower:
+        try:
+            parts = date_string_lower.split()
+            if len(parts) >= 2 and parts[0].isdigit():
+                value = int(parts[0])
+                unit = parts[1]
+                if "day" in unit:
+                    return (now - timedelta(days=value)).replace(
+                        hour=0, minute=0, second=0, microsecond=0
+                    )
+                elif "week" in unit:
+                    return (now - timedelta(weeks=value)).replace(
+                        hour=0, minute=0, second=0, microsecond=0
+                    )
+                elif "month" in unit:
+                    # Approximation for months/years ago
+                    return (now - timedelta(days=value * 30)).replace(
+                        hour=0, minute=0, second=0, microsecond=0
+                    )
+                elif "year" in unit:
+                    return (now - timedelta(days=value * 365)).replace(
+                        hour=0, minute=0, second=0, microsecond=0
+                    )
+        except Exception:
+            pass  # Fall through to absolute date parsing
+        # Handle absolute dates
+    try:
+        # dateutil.parser.parse is robust for many formats
+        dt_obj = date_parser.parse(date_string)
+        # Ensure timezone awareness if not already present
+        if dt_obj.tzinfo is None:
+            dt_obj = dt_obj.replace(tzinfo=timezone.utc)
+        return dt_obj
+    except Exception as e:
+        print(f"    -  Could not parse date string '{date_string}': {e}")
+        return None
 
 
-def fetch_articles_via_llm(source):
+def _fetch_and_prepare_text_with_links(url):
     """
-    Fetches articles using a local LLM (Ollama) to parse the HTML content.
+    Fetches HTML content using Selenium, extracts plain text,
+    and appends all found unique, absolute links at the end.
     """
-    results = []
-    one_week_ago = datetime.now(timezone.utc) - timedelta(days=7)
+    options = Options()
+    options.add_argument("--headless")  # Run in headless mode (no visible browser UI)
+    options.add_argument("--disable-gpu")  # Recommended for headless on Windows/WSL
+    options.add_argument(
+        "--no-sandbox"
+    )  # Bypass OS security model, required for some environments
+    options.add_argument(
+        "--disable-dev-shm-usage"
+    )  # Overcome limited resource problems
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    )  # Mimic a real user agent
+
+    driver = None  # Initialize driver to None for proper cleanup
+    try:
+        driver = webdriver.Chrome(options=options)
+
+        print(f"    -  Navigating to {url} with Selenium...")
+        driver.get(url)
+
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
+        )
+
+        html_content = driver.page_source
+        soup = BeautifulSoup(html_content, "html.parser")
+
+        # --- 1. Get clean plain text ---
+        # Remove script and style tags before getting text
+        for script_or_style in soup(["script", "style"]):
+            script_or_style.extract()
+
+        plain_text = soup.get_text()
+        plain_text = re.sub(
+            r"\n\s*\n", "\n", plain_text
+        )  # Replace multiple newlines with a single one
+        plain_text = "\n".join(
+            [line.strip() for line in plain_text.splitlines()]
+        )  # Remove leading/trailing whitespace
+        plain_text = re.sub(
+            r" +", " ", plain_text
+        )  # Replace multiple spaces with a single space
+
+        # --- 2. Extract all unique, absolute links ---
+        extracted_urls = set()  # Use a set to store unique URLs
+        for a_tag in soup.find_all("a", href=True):
+            href = a_tag["href"]
+
+            # Resolve relative URLs to absolute URLs
+            absolute_href = urljoin(url, href)
+
+            # Filter out common non-content links (e.g., mailto, javascript, empty fragment)
+            if (
+                absolute_href
+                and not absolute_href.startswith(("mailto:", "javascript:", "#"))
+                and absolute_href != url
+            ):
+                extracted_urls.add(absolute_href)
+
+        # --- 3. Append links to the plain text ---
+        if extracted_urls:
+            # Sort for consistent output, though not strictly necessary for LLM
+            sorted_urls = sorted(list(extracted_urls))
+            plain_text += "\n\n--- ALL LINKS ---\n"
+            plain_text += "\n".join(sorted_urls)
+
+        return plain_text
+    except TimeoutException:
+        print(f"    -  Timeout while loading {url}. Content might not have loaded.")
+        return None
+    except WebDriverException as e:
+        print(
+            f"    -  Selenium WebDriver error for {url}: {e}. Ensure Chrome browser is installed and compatible ChromeDriver is available in PATH."
+        )
+        return None
+    except Exception as e:
+        print(f"    -  An unexpected error occurred for {url}: {e}")
+        return None
+    finally:
+        if driver:
+            driver.quit()  # Ensure browser is closed
+
+
+def _extract_articles_with_llm(plain_text_with_links, llm_model="llama3.1"):
+    """
+    Uses an Ollama LLM to extract article titles, URLs, and raw dates from plain text
+    that includes appended raw URLs.
+    This function now simply returns the raw string response from the LLM.
+    """
+    llm = Ollama(
+        model=llm_model, temperature=0.1
+    )  # Low temperature for more predictable output
+
+    # The prompt now explicitly tells the LLM about the appended raw URLs section
+    extraction_prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                """You are an expert web content extractor. Your task is to identify articles or posts from the provided text content.
+        The text content contains the main body of the webpage, followed by a section titled "--- ALL LINKS ---" which lists all unique, absolute URLs found on the page, one per line.
+
+        For each article, extract its title, its full URL, and its publication date string.
+        The publication date can be in various formats (e.g., "2 days ago", "Yesterday", "September 1, 2023", "2023-09-01", "Published: 2023-08-10").
+
+        **Crucially, when extracting the URL for an article, you MUST find it from the "--- ALL LINKS ---" section.** Match the title or context of the article to the most relevant URL provided in that section. Do NOT try to infer URLs directly from the main text or create them. If an article cannot be confidently matched to a URL in the list, do not include it.
+
+        Return the results as a JSON array of objects. Each object must have 'title', 'url', and 'raw_date' fields.
+        If no articles are found, return an empty JSON array [].
+        Limit your extraction to the first 10 distinct articles you find.
+
+        Example Output Format:
+        [
+          {{
+            "title": "How to Use Ollama Locally",
+            "url": "https://ollama.com/blog/local-ollama-guide",
+            "raw_date": "2023-10-26"
+          }},
+          {{
+            "title": "New Features in Llama 3.1",
+            "url": "https://ollama.com/blog/llama3.1-features",
+            "raw_date": "1 day ago"
+          }}
+        ]
+        """,
+            ),
+            (
+                "user",
+                "Extract article details from this content:\n\nContent:\n{plain_text_with_links}",
+            ),
+        ]
+    )
+
+    # The chain now directly returns the LLM's string output, no parsing
+    extraction_chain = extraction_prompt | llm
 
     try:
-        # 1. Fetch the raw HTML content
-        print(f"    -  Fetching HTML from {source['url']}")
-        response = requests.get(source["url"])
-        response.raise_for_status()
-        html_content = response.text
-
-        # 2. Pre-process HTML if too large for LLM context window
-        processed_html = _truncate_html(html_content)
-
-        # 3. Define the prompt for the LLM
-        # This prompt is crucial for guiding the LLM to extract the correct info
-        # Emphasize JSON output format for reliable parsing
-        prompt_instructions = f"""
-        You are an expert web scraper. Analyze the following HTML content from {source['name']}.
-        Identify and extract information about recent articles or posts.
-        For each article, extract its exact title, its full URL, and its publication date.
-        Only include articles published within the last 7 days from today ({datetime.now().strftime('%Y-%m-%d')}).
-        If a publication year is not explicitly mentioned, assume the current year.
-        
-        Output the results strictly as a JSON array of objects. Each object MUST have the keys:
-        'title' (string): The title of the article.
-        'url' (string): The full URL of the article.
-        'date' (string): The publication date in YYYY-MM-DD format.
-        
-        If no relevant articles are found, return an empty JSON array `[]`.
-        
-        HTML Content for {source['url']}:
-        {processed_html}
-        """
-
-        # 4. Call the local Ollama LLM
-        print(f"    -  Calling Ollama model '{OLLAMA_MODEL}'...")
-        client = ollama.Client(host=OLLAMA_HOST)
-
-        llm_response = client.chat(
-            model=OLLAMA_MODEL,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant that extracts structured JSON data from HTML.",
-                },
-                {"role": "user", "content": prompt_instructions},
-            ],
-            # Adding format='json' (if supported by the model/ollama version) can help enforce JSON output
-            # Some models might need it explicitly in the prompt.
-            # options={'format': 'json'} # Uncomment if your Ollama version/model supports this
-        )
-
-        # Extract the content from the LLM's response
-        llm_output_content = llm_response["message"]["content"]
-
-        # Attempt to find the JSON part of the output, as LLMs can sometimes wrap it
-        # This regex looks for the first JSON array or object
-        json_match = re.search(r"\[.*\]|\{.*\}", llm_output_content, re.DOTALL)
-        if json_match:
-            json_str = json_match.group(0)
-            print("    -  LLM response (JSON part found):")
-            # print(json_str) # Uncomment to see the raw JSON from LLM
-        else:
-            raise ValueError("No JSON structure found in LLM response.")
-
-        # 5. Parse the LLM's JSON response
-        parsed_data = json.loads(json_str)
-
-        if not isinstance(parsed_data, list):
-            raise TypeError("LLM did not return a JSON array as expected.")
-
-        for item in parsed_data:
-            # Validate required keys
-            if not all(k in item for k in ["title", "url", "date"]):
-                print(
-                    f"    -  Warning: LLM item missing required keys (title, url, date): {item}"
-                )
-                continue
-
-            try:
-                # Convert the date string from LLM into a datetime object
-                article_date = datetime.strptime(item["date"], "%Y-%m-%d").replace(
-                    tzinfo=timezone.utc
-                )
-                if article_date >= one_week_ago:
-                    results.append(
-                        {
-                            "source": source["name"],
-                            "title": item["title"],
-                            "url": item["url"],
-                            "date": article_date,
-                        }
-                    )
-            except ValueError as e:
-                print(
-                    f"    -  Warning: Could not parse date '{item.get('date')}' for article '{item.get('title')}'. Error: {e}"
-                )
-            except Exception as e:
-                print(f"    -  Warning: Error processing LLM item: {item}. Error: {e}")
-
-    except requests.exceptions.RequestException as e:
-        print(f"    -  HTTP error fetching {source['url']}: {e}")
-    except json.JSONDecodeError as e:
-        print(
-            f"    -  LLM did not return valid JSON or JSON parsing failed for {source['name']}: {e}. Raw LLM output might be: {llm_output_content[:500]}..."
-        )
-    except ollama.ResponseError as e:
-        print(
-            f"    -  Ollama API error for {source['name']}: {e}. Is Ollama server running and model '{OLLAMA_MODEL}' pulled?"
-        )
-    except ValueError as e:
-        print(f"    -  Data extraction error for {source['name']}: {e}")
+        # Invoke the chain and return the raw string response
+        return extraction_chain.invoke({"plain_text_with_links": plain_text_with_links})
     except Exception as e:
-        print(f"    -  An unexpected error occurred for {source['name']}: {e}")
+        print(f"    -  Error during LLM extraction: {e}")
+        return None  # Return None on error
 
-    return results
+
+# --- Main Function for Web Articles ---
 
 
-# --- Main Execution Block ---
+def fetch_web_articles(source, llm_model="llama3.1"):
+    """
+    Fetches articles from a webpage using Selenium and Ollama LLM.
+    Returns the raw string output from the LLM.
+    """
+    print(
+        f"    -  Fetching and preparing text with links for {source['name']} ({source['url']})"
+    )
+    plain_text_with_links = _fetch_and_prepare_text_with_links(source["url"])
+
+    if not plain_text_with_links:
+        return None  # Return None if content fetching failed
+
+    print(f"    -  Extracting articles from {source['name']} using LLM ({llm_model})")
+    # This now returns the raw string from the LLM
+    llm_raw_output = _extract_articles_with_llm(plain_text_with_links, llm_model)
+
+    return llm_raw_output
+
+
+# --- Main Execution Block (simplified for text file output) ---
 
 if __name__ == "__main__":
-    sources_to_fetch = [
+    # Ensure Ollama is running and you have the model pulled (e.g., ollama pull llama3.1)
+    OLLAMA_MODEL = "llama3.1"  # Or "mistral", "gemma3", etc.
+    OUTPUT_FILENAME = "llm_extracted_articles.txt"
+
+    # Define the web pages you want to fetch articles from
+    web_sources_to_fetch = [
         {
-            "name": "Think BRICS Substack Archive",
+            "name": "Think BRICs",
             "url": "https://thinkbrics.substack.com/archive",
         },
         {
-            "name": "The Socialist Program Patreon Posts",
-            "url": "https://www.patreon.com/TheSocialistProgram/posts",
+            "name": "Progressive International",
+            "url": "https://progressive.international",
         },
-        # Add other sources here. The beauty of LLMs is you don't need a new 'type'
-        # for each site, as the LLM should adapt.
     ]
 
-    print("Attempting to fetch recent articles using Ollama (Llama2)...")
-    all_recent_articles = []
-    for source_info in sources_to_fetch:
-        print(f"\nProcessing source: {source_info['name']} ({source_info['url']})")
-        articles = fetch_articles_via_llm(source_info)
-        if articles:
-            print(f"Found {len(articles)} recent articles for {source_info['name']}:")
-            for article in articles:
-                print(f"  - Title: {article['title']}")
-                print(f"    URL: {article['url']}")
-                print(
-                    f"    Published: {article['date'].strftime('%Y-%m-%d %H:%M:%S UTC')}"
-                )
-            all_recent_articles.extend(articles)
-        else:
+    print(f"Fetching web articles and saving raw LLM output to '{OUTPUT_FILENAME}'...")
+
+    with open(OUTPUT_FILENAME, "w", encoding="utf-8") as outfile:
+        for web_source in web_sources_to_fetch:
             print(
-                f"No recent articles found for {source_info['name']} in the last 7 days, or an error occurred."
+                f"\nProcessing web source: {web_source['name']} ({web_source['url']})"
             )
 
-    print("\n--- Summary of all recent articles ---")
-    if all_recent_articles:
-        all_recent_articles.sort(key=lambda x: x["date"], reverse=True)
-        for article in all_recent_articles:
-            print(
-                f"[{article['source']}] {article['date'].strftime('%Y-%m-%d')} - {article['title']} ({article['url']})"
-            )
-    else:
-        print("No recent articles found across all specified sources.")
+            # fetch_web_articles now returns the raw LLM string
+            llm_output = fetch_web_articles(web_source, llm_model=OLLAMA_MODEL)
+
+            outfile.write(f"Source({web_source['url']}):\n")
+            if llm_output:
+                outfile.write(llm_output)
+            else:
+                outfile.write("No LLM output or an error occurred.\n")
+            outfile.write("\n---\n\n")  # Separator between sources
+
+            time.sleep(2)  # Be polite and wait between requests
+
+    print(f"\nProcessing complete. Raw LLM outputs saved to '{OUTPUT_FILENAME}'.")

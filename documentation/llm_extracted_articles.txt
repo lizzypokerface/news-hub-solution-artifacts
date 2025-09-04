@@ -1,0 +1,121 @@
+Source(https://thinkbrics.substack.com/archive):
+Here is the extracted article data in JSON format:
+
+```
+[
+  {
+    "title": "9·3” military parade demonstrates China's determination to maintain world peace",
+    "url": "https://thinkbrics.substack.com/p/93-military-parade-demonstrates-chinas",
+    "raw_date": "12 hrs ago"
+  },
+  {
+    "title": "From the Berlin Wall to BRICS",
+    "url": "https://thinkbrics.substack.com/p/from-the-berlin-wall-to-brics",
+    "raw_date": "Sep 3"
+  },
+  {
+    "title": "Visions about the BRICS Electricity Alliance",
+    "url": "https://thinkbrics.substack.com/p/visions-about-the-brics-electricity",
+    "raw_date": "Aug 2025"
+  },
+  {
+    "title": "India-China Relations: What’s Behind the Recent Thaw?",
+    "url": "https://thinkbrics.substack.com/p/india-china-relations-whats-behind",
+    "raw_date": "Aug 29"
+  },
+  {
+    "title": "BRICS AI Revolution - The Untold Story",
+    "url": "https://thinkbrics.substack.com/p/inside-brics-push-for-ai-independence",
+    "raw_date": "Aug 26"
+  },
+  {
+    "title": "Bolivia's Right Turn: A Seismic Shift for Latin America and the BRICS Coalition",
+    "url": "https://thinkbrics.substack.com/p/bolivias-right-turn-a-seismic-shift",
+    "raw_date": "Aug 19"
+  },
+  {
+    "title": "Hudson Institute Report Envisions U.S. Strategy for a Post-CCP China",
+    "url": "https://thinkbrics.substack.com/p/hudson-institute-report-envisions",
+    "raw_date": "Aug 14"
+  },
+  {
+    "title": "Stablecoins and the GENIUS Act: Money, Illusion, or Geopolitical Weapon?",
+    "url": "https://thinkbrics.substack.com/p/stablecoins-and-the-genius-act-money",
+    "raw_date": "Aug 11"
+  },
+  {
+    "title": "The Forever War, Profitable Edition: Why China & Russia Are the Deep State's Best Friends.",
+    "url": "https://thinkbrics.substack.com/p/the-forever-war-profitable-edition",
+    "raw_date": "Aug 6"
+  },
+  {
+    "title": "The Russia-India-China Trilateral: Challenges and Future of a Reshaping World",
+    "url": "https://thinkbrics.substack.com/p/the-russia-india-china-trilateral",
+    "raw_date": "Aug 5"
+  }
+]
+```
+
+Note that I've extracted the first 10 articles based on their publication dates, which are available in the format of "X days ago", "Sep X", or "Aug X". The URLs were matched to each article by searching for the title in the list of links.
+---
+
+Source(https://progressive.international):
+Here is the extracted data in JSON format:
+
+```
+[
+  {
+    "title": "Overcrowding worsens in west Gaza City as Israel’s military advance displaces tens of thousands",
+    "url": "https://progressive.international/wire/2025-09-04-overcrowding-worsens-in-west-gaza-city-as-israels-military-advance-displaces-tens-of-thousands/en",
+    "raw_date": "2025-09-04"
+  },
+  {
+    "title": "In Philippines, Indigenous peoples and advocates launch Defend Mindoro campaign against state abuses",
+    "url": "https://progressive.international/wire/2025-09-03-in-philippines-indigenous-peoples-and-advocates-launch-defend-mindoro-campaign-against-state-abuses/en",
+    "raw_date": "2025-09-03"
+  },
+  {
+    "title": “No War on Venezuela!”,
+    "url": "https://progressive.international/wire/2025-08-31-no-war-on-venezuela-/en",
+    "raw_date": "2025-08-31"
+  },
+  {
+    "title": "PI Briefing | No. 32 | Breaking the Blockade",
+    "url": "https://progressive.international/wire/2025-08-29-pi-briefing-no-32-breaking-the-blockade/en",
+    "raw_date": "2025-08-29"
+  },
+  {
+    "title": "Eurafrique reloaded",
+    "url": "https://progressive.international/wire/2025-08-28-eurafrique-reloaded/en",
+    "raw_date": "2025-08-28"
+  },
+  {
+    "title": "'We are sailing to Gaza. Here's why.'",
+    "url": "https://progressive.international/wire/2025-08-26-we-are-sailing-to-gaza-heres-why-/en",
+    "raw_date": "2025-08-26"
+  },
+  {
+    "title": "UN Calls Out Google and Amazon for Abetting Gaza Genocide",
+    "url": "https://progressive.international/wire/2025-08-26-un-calls-out-google-and-amazon-for-abetting-gaza-genocide/en",
+    "raw_date": "2025-08-26"
+  },
+  {
+    "title": "PI Briefing | No. 31 | Sovereignty Is Not for Sale",
+    "url": "https://progressive.international/wire/2025-08-25-pi-briefing-no-31-sovereignty-is-not-for-sale/en",
+    "raw_date": "2025-08-25"
+  },
+  {
+    "title": "Reorganizing Production to Serve Life, Not Profit",
+    "url": "https://progressive.international/wire/2025-08-22-reorganizing-production-to-serve-life-not-profit/en",
+    "raw_date": "2025-08-22"
+  },
+  {
+    "title": "Trump’s Secret Deportations to Africa’s Last Absolute Monarchy",
+    "url": "https://progressive.international/wire/2025-08-21-trumps-secret-deportations-to-africas-last-absolute-monarchy/en",
+    "raw_date": "2025-08-21"
+  }
+]
+```
+
+Note that I've only extracted the first 9 items as per your request to limit the output. If you need more, please let me know!
+---
