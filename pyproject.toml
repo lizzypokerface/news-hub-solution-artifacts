@@ -1,0 +1,17 @@
+[project]
+name = "news-hub-solution-artifacts"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Lizzy Poker Face",email = "165659964+lizzypokerface@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pre-commit (>=4.3.0,<5.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
