@@ -1,0 +1,37 @@
+(venv) glenn@gl-aiml:~/projects/news-hub-solution-artifacts/scripts$ python extract_summarise_webpage.py
+--- Starting Webpage Fetch and Summarize Test (with Ollama) ---
+/home/glenn/projects/news-hub-solution-artifacts/scripts/extract_summarise_webpage.py:102: LangChainDeprecationWarning: The class `Ollama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import OllamaLLM``.
+  llm = Ollama(model="llama3.1")
+/home/glenn/projects/news-hub-solution-artifacts/scripts/extract_summarise_webpage.py:103: LangChainDeprecationWarning: The class `LLMChain` was deprecated in LangChain 0.1.17 and will be removed in 1.0. Use :meth:`~RunnableSequence, e.g., `prompt | llm`` instead.
+  llm_chain = LLMChain(prompt=prompt, llm=llm)
+
+LangChain and Ollama initialized successfully.
+
+--- Test Case 1: Processing URL: https://www.aljazeera.com/ ---
+
+>>> Webpage Text Extracted Successfully.
+>>> Generating Summary (~100 words) with Ollama Llama 3...
+
+✅ FINAL SUMMARY:
+The webpage reports on various international news stories, with a focus on the Middle East and global politics. Gaza is experiencing a significant humanitarian crisis, with dozens of children killed as Israel's "genocide in motion" continues. Other news includes Google being criticized over a reported content deal with Israel, UN rights chief urging the US to withdraw sanctions on Palestinian NGOs, and Tesla proposing a trillion-dollar compensation package for CEO Elon Musk. Opinion pieces discuss topics such as racism, Western sanctions, and complicity in Gaza's genocide. Sports coverage includes analysis of the US Open 2025 and Asia Cup 2025.
+
+======================================================================
+
+--- Test Case 2: Processing URL: https://progressive.international/ ---
+
+>>> Webpage Text Extracted Successfully.
+>>> Generating Summary (~100 words) with Ollama Llama 3...
+
+✅ FINAL SUMMARY:
+The Progressive International is an organization that empowers progressive activists and organizers to create a shared vision of a world transformed. Its activities are divided into four pillars: Movement, Blueprint, Wire, and Observatory. The Movement pillar aims to empower activists, while the Blueprint pillar crafts a shared vision for a new international economic order. The Wire publishes grassroots and critical perspectives, and the Observatory tracks attacks on democratic processes. Recent updates include reports on Gaza City overcrowding, Indigenous peoples' campaigns in the Philippines, and condemnations of war on Venezuela. The organization also publishes briefings and statements on various issues, including colonialism and human rights.
+
+======================================================================
+
+--- Test Case 3: Processing URL: https://non-existent-url-12345.com ---
+Error fetching URL https://non-existent-url-12345.com: HTTPSConnectionPool(host='non-existent-url-12345.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7800a3d3b610>: Failed to resolve 'non-existent-url-12345.com' ([Errno -2] Name or service not known)"))
+
+❌ FAILED to extract text. Cannot generate summary.
+
+======================================================================
+
+--- Test Complete ---
