@@ -1,0 +1,126 @@
+Fetching recent YouTube videos...
+
+Processing channel: Al Jazeera English (https://www.youtube.com/@aljazeeraenglish)
+Found 30 recent videos for Al Jazeera English:
+  - Title: Bus crashes off steep cliff, killing at least 15 people in Sri Lanka | AJ #shorts
+    URL: https://www.youtube.com/watch?v=y87d02wRfDM
+    Published: 2025-09-05 17:39:20 UTC
+  - Title: How significant is Xi, Putin and Kim's first meeting in Beijing? | Inside Story
+    URL: https://www.youtube.com/watch?v=189q93DldKQ
+    Published: 2025-09-05 17:30:00 UTC
+  - Title: Thailand elects Anutin Charnvirakul as new Prime Minister
+    URL: https://www.youtube.com/watch?v=ABQTfqmTGjw
+    Published: 2025-09-05 16:59:27 UTC
+  - Title: Earthquake shakes Afghanistan #TheTake #Shorts #Podcast
+    URL: https://www.youtube.com/watch?v=FjLCVZqikds
+    Published: 2025-09-05 16:57:54 UTC
+  - Title: After the earthquake: what lies ahead for Afghanistan? | The Take
+    URL: https://www.youtube.com/watch?v=g18YebshJAQ
+    Published: 2025-09-05 16:39:29 UTC
+  - Title: Gaza’s Zeitoun district flattened, residents face total destruction
+    URL: https://www.youtube.com/watch?v=6Vui2AjNZQE
+    Published: 2025-09-05 16:04:10 UTC
+  - Title: Tel Aviv protesters unveil huge SOS sign demanding ceasefire in Gaza | AJ #shorts
+    URL: https://www.youtube.com/watch?v=vpVkawumW9Y
+    Published: 2025-09-05 15:40:48 UTC
+  - Title: The rise of reform UK: Right wing party celebrates recent polling gains
+    URL: https://www.youtube.com/watch?v=73hZ0iLJdGM
+    Published: 2025-09-05 13:58:38 UTC
+  - Title: Unofficial Gaza tribunal accuses UK of complicity in Israel's genocide | AJ #shorts
+    URL: https://www.youtube.com/watch?v=CDi63FXawtQ
+    Published: 2025-09-05 13:50:25 UTC
+  - Title: Israel trying to ‘punish civilian areas’, drive Palestinians out of Gaza : Analysis
+    URL: https://www.youtube.com/watch?v=0k111-MwLSI
+    Published: 2025-09-05 13:41:50 UTC
+  - Title: Israel attack on tower marks ‘terrifying shift’ towards targeting high-rise buildings in Gaza City
+    URL: https://www.youtube.com/watch?v=iz27L7jAtUQ
+    Published: 2025-09-05 12:38:22 UTC
+  - Title: Israel destroys one of Gaza City’s biggest buildings | AJ #shorts
+    URL: https://www.youtube.com/watch?v=otiZMENn3iA
+    Published: 2025-09-05 12:23:26 UTC
+  - Title: Downton Abbey star interrupts TV interview with plea for Gaza | AJ #shorts
+    URL: https://www.youtube.com/watch?v=eFmAlxdCfp4
+    Published: 2025-09-05 12:13:14 UTC
+  - Title: Israel’s razing of Gaza City could take ‘months, if not more than a year’
+    URL: https://www.youtube.com/watch?v=62PeI6eDCdw
+    Published: 2025-09-05 12:00:10 UTC
+  - Title: Australian parties all “very tough” on asylum seekers
+    URL: https://www.youtube.com/watch?v=GRSi2OPNU6c
+    Published: 2025-09-05 10:45:56 UTC
+  - Title: Afghans unsure which “crisis to respond to” after earthquake
+    URL: https://www.youtube.com/watch?v=EtDYE57daUU
+    Published: 2025-09-05 10:32:59 UTC
+  - Title: Pakistan flooding: Thousands impacted in Khyber Pakhtunkhwa province
+    URL: https://www.youtube.com/watch?v=JvwhELPgEnc
+    Published: 2025-09-05 10:30:13 UTC
+  - Title: Palestinian boys shot in testicles as “target practice”
+    URL: https://www.youtube.com/watch?v=_OlzPz-HJRk
+    Published: 2025-09-05 10:20:43 UTC
+  - Title: US sanctions Palestinian rights groups to ‘silence them’ | AJ #shorts
+    URL: https://www.youtube.com/watch?v=I80_pmHaPsY
+    Published: 2025-09-05 10:07:11 UTC
+  - Title: Afghanistan aftershocks: Families await help in remote villages
+    URL: https://www.youtube.com/watch?v=pZp_PH2VcJ0
+    Published: 2025-09-05 10:01:34 UTC
+  - Title: Thai parliament elects Anutin Charnvirakul as prime minister
+    URL: https://www.youtube.com/watch?v=nDcPK948Atk
+    Published: 2025-09-05 09:17:12 UTC
+  - Title: Pakistan flooding: Nearly 4 million people affected by punjab flooding
+    URL: https://www.youtube.com/watch?v=MzzWkfPSpMs
+    Published: 2025-09-05 08:30:11 UTC
+  - Title: Returning to Tulkarem: Palestinians find Israeli army destroyed their homes
+    URL: https://www.youtube.com/watch?v=TexEaoPrnSY
+    Published: 2025-09-05 08:29:23 UTC
+  - Title: Thailand Chooses New Prime Minister: Party Clashes & Political Tensions
+    URL: https://www.youtube.com/watch?v=1_IYhU9o7o0
+    Published: 2025-09-05 07:44:29 UTC
+  - Title: Africa food systems forum: Agricultural entrepreneurs tackle food insecurity
+    URL: https://www.youtube.com/watch?v=00EJiZrEe6Y
+    Published: 2025-09-05 07:00:00 UTC
+  - Title: US top diplomat in Latin America: Washington mulls military base in Ecuador
+    URL: https://www.youtube.com/watch?v=v7_a4ofBb2k
+    Published: 2025-09-05 06:00:47 UTC
+  - Title: Questions raised after US strike off Venezuela coast
+    URL: https://www.youtube.com/watch?v=PaB47z6Kc1Q
+    Published: 2025-09-05 02:24:30 UTC
+  - Title: Displaced Palestinians targeted as Israeli forces bomb Gaza tents
+    URL: https://www.youtube.com/watch?v=U5qLYa0llbM
+    Published: 2025-09-05 01:12:11 UTC
+  - Title: Senate clashes with RFK Jr over vaccine policies and CDC firings
+    URL: https://www.youtube.com/watch?v=k-6WXuUnORg
+    Published: 2025-09-05 00:11:52 UTC
+  - Title: Rubio in Ecuador: Washington pledges $20m in security aid
+    URL: https://www.youtube.com/watch?v=n_JSIVmo81E
+    Published: 2025-09-04 23:19:43 UTC
+
+--- Summary of all recent videos ---
+[Al Jazeera English] 2025-09-05 - Bus crashes off steep cliff, killing at least 15 people in Sri Lanka | AJ #shorts (https://www.youtube.com/watch?v=y87d02wRfDM)
+[Al Jazeera English] 2025-09-05 - How significant is Xi, Putin and Kim's first meeting in Beijing? | Inside Story (https://www.youtube.com/watch?v=189q93DldKQ)
+[Al Jazeera English] 2025-09-05 - Thailand elects Anutin Charnvirakul as new Prime Minister (https://www.youtube.com/watch?v=ABQTfqmTGjw)
+[Al Jazeera English] 2025-09-05 - Earthquake shakes Afghanistan #TheTake #Shorts #Podcast (https://www.youtube.com/watch?v=FjLCVZqikds)
+[Al Jazeera English] 2025-09-05 - After the earthquake: what lies ahead for Afghanistan? | The Take (https://www.youtube.com/watch?v=g18YebshJAQ)
+[Al Jazeera English] 2025-09-05 - Gaza’s Zeitoun district flattened, residents face total destruction (https://www.youtube.com/watch?v=6Vui2AjNZQE)
+[Al Jazeera English] 2025-09-05 - Tel Aviv protesters unveil huge SOS sign demanding ceasefire in Gaza | AJ #shorts (https://www.youtube.com/watch?v=vpVkawumW9Y)
+[Al Jazeera English] 2025-09-05 - The rise of reform UK: Right wing party celebrates recent polling gains (https://www.youtube.com/watch?v=73hZ0iLJdGM)
+[Al Jazeera English] 2025-09-05 - Unofficial Gaza tribunal accuses UK of complicity in Israel's genocide | AJ #shorts (https://www.youtube.com/watch?v=CDi63FXawtQ)
+[Al Jazeera English] 2025-09-05 - Israel trying to ‘punish civilian areas’, drive Palestinians out of Gaza : Analysis (https://www.youtube.com/watch?v=0k111-MwLSI)
+[Al Jazeera English] 2025-09-05 - Israel attack on tower marks ‘terrifying shift’ towards targeting high-rise buildings in Gaza City (https://www.youtube.com/watch?v=iz27L7jAtUQ)
+[Al Jazeera English] 2025-09-05 - Israel destroys one of Gaza City’s biggest buildings | AJ #shorts (https://www.youtube.com/watch?v=otiZMENn3iA)
+[Al Jazeera English] 2025-09-05 - Downton Abbey star interrupts TV interview with plea for Gaza | AJ #shorts (https://www.youtube.com/watch?v=eFmAlxdCfp4)
+[Al Jazeera English] 2025-09-05 - Israel’s razing of Gaza City could take ‘months, if not more than a year’ (https://www.youtube.com/watch?v=62PeI6eDCdw)
+[Al Jazeera English] 2025-09-05 - Australian parties all “very tough” on asylum seekers (https://www.youtube.com/watch?v=GRSi2OPNU6c)
+[Al Jazeera English] 2025-09-05 - Afghans unsure which “crisis to respond to” after earthquake (https://www.youtube.com/watch?v=EtDYE57daUU)
+[Al Jazeera English] 2025-09-05 - Pakistan flooding: Thousands impacted in Khyber Pakhtunkhwa province (https://www.youtube.com/watch?v=JvwhELPgEnc)
+[Al Jazeera English] 2025-09-05 - Palestinian boys shot in testicles as “target practice” (https://www.youtube.com/watch?v=_OlzPz-HJRk)
+[Al Jazeera English] 2025-09-05 - US sanctions Palestinian rights groups to ‘silence them’ | AJ #shorts (https://www.youtube.com/watch?v=I80_pmHaPsY)
+[Al Jazeera English] 2025-09-05 - Afghanistan aftershocks: Families await help in remote villages (https://www.youtube.com/watch?v=pZp_PH2VcJ0)
+[Al Jazeera English] 2025-09-05 - Thai parliament elects Anutin Charnvirakul as prime minister (https://www.youtube.com/watch?v=nDcPK948Atk)
+[Al Jazeera English] 2025-09-05 - Pakistan flooding: Nearly 4 million people affected by punjab flooding (https://www.youtube.com/watch?v=MzzWkfPSpMs)
+[Al Jazeera English] 2025-09-05 - Returning to Tulkarem: Palestinians find Israeli army destroyed their homes (https://www.youtube.com/watch?v=TexEaoPrnSY)
+[Al Jazeera English] 2025-09-05 - Thailand Chooses New Prime Minister: Party Clashes & Political Tensions (https://www.youtube.com/watch?v=1_IYhU9o7o0)
+[Al Jazeera English] 2025-09-05 - Africa food systems forum: Agricultural entrepreneurs tackle food insecurity (https://www.youtube.com/watch?v=00EJiZrEe6Y)
+[Al Jazeera English] 2025-09-05 - US top diplomat in Latin America: Washington mulls military base in Ecuador (https://www.youtube.com/watch?v=v7_a4ofBb2k)
+[Al Jazeera English] 2025-09-05 - Questions raised after US strike off Venezuela coast (https://www.youtube.com/watch?v=PaB47z6Kc1Q)
+[Al Jazeera English] 2025-09-05 - Displaced Palestinians targeted as Israeli forces bomb Gaza tents (https://www.youtube.com/watch?v=U5qLYa0llbM)
+[Al Jazeera English] 2025-09-05 - Senate clashes with RFK Jr over vaccine policies and CDC firings (https://www.youtube.com/watch?v=k-6WXuUnORg)
+[Al Jazeera English] 2025-09-04 - Rubio in Ecuador: Washington pledges $20m in security aid (https://www.youtube.com/watch?v=n_JSIVmo81E)

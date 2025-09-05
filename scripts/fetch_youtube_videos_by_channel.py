@@ -108,8 +108,7 @@ def fetch_youtube_videos(source, youtube_service):
 
 if __name__ == "__main__":
     # IMPORTANT: Replace with your actual YouTube Data API Key
-    API_KEY = "AIzaSyAVhlCjBi1Fvs5WnEQuGFwajgeyvAzrSlU"
-
+    API_KEY = "AIzaSyBAmGmUB5hQh9FO-DxFwLyVznT_QFxDsK0"
     if API_KEY == "YOUR_API_KEY":
         print(
             "ERROR: Please replace 'YOUR_API_KEY' with your actual YouTube Data API Key."

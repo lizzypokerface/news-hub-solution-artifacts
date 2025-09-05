@@ -1,4 +1,4 @@
-# fetch_youtube_videos_by_channel_handle
+# fetch_youtube_videos_by_channel
 
 ### Setup Instructions
 
