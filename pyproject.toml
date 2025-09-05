@@ -6,7 +6,7 @@ authors = [
     {name = "Lizzy Poker Face",email = "165659964+lizzypokerface@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13,<4.0"
+requires-python = ">=3.13,<3.14"
 dependencies = [
     "pre-commit (>=4.3.0,<5.0.0)",
     "google-api-python-client (>=2.181.0,<3.0.0)",
@@ -18,7 +18,8 @@ dependencies = [
     "selenium (>=4.35.0,<5.0.0)",
     "langchain-community (>=0.3.29,<0.4.0)",
     "webdriver-manager (>=4.0.2,<5.0.0)",
-    "langchain-core (>=0.3.75,<0.4.0)"
+    "langchain-core (>=0.3.75,<0.4.0)",
+    "youtube-transcript-api (>=1.2.2,<2.0.0)"
 ]
 
 [tool.poetry.group.dev.dependencies]
