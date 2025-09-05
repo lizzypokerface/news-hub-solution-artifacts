@@ -1,0 +1,42 @@
+(venv) glenn@gl-aiml:~/projects/news-hub-solution-artifacts/scripts$ python extract_summarise_youtube_transcript.py
+--- Starting YouTube Transcript Fetch and Summarize Test (with Ollama) ---
+/home/glenn/projects/news-hub-solution-artifacts/scripts/extract_summarise_youtube_transcript.py:110: LangChainDeprecationWarning: The class `Ollama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import OllamaLLM``.
+  llm = Ollama(model="llama3.1")
+/home/glenn/projects/news-hub-solution-artifacts/scripts/extract_summarise_youtube_transcript.py:113: LangChainDeprecationWarning: The class `LLMChain` was deprecated in LangChain 0.1.17 and will be removed in 1.0. Use :meth:`~RunnableSequence, e.g., `prompt | llm`` instead.
+  llm_chain = LLMChain(prompt=prompt, llm=llm)
+
+LangChain and Ollama initialized successfully.
+
+--- Test Case 1: Processing URL: https://www.youtube.com/watch?v=ulvxk3tWhuM ---
+
+>>> Transcript Fetched Successfully.
+>>> Generating Summary (~100 words) with Ollama Llama 3...
+
+✅ FINAL SUMMARY:
+A journalist, Kurt Hackbarth, discusses Mexico's progress under former President Amllo's six-year term, which saw 13.4 million people lifted out of poverty and 2 million escape extreme poverty. This achievement was attributed to a combination of factors, including social programs, rising wages, and labor reforms. However, the conversation shifts to concerns about US intentions towards Mexico, with reports suggesting plans for military action against cartels. Hackbarth argues that this is part of a larger narrative of US hostility towards Mexico, driven by racism, interventionist foreign policy, and a desire to undermine Mexico's autonomy and modernization. The discussion also touches on the role of intelligence agencies, such as the DEA, in leaking information and influencing public opinion against Amllo's administration.
+
+======================================================================
+
+--- Test Case 2: Processing URL: https://www.youtube.com/watch?v=sVhU_q1ZYjQ ---
+
+>>> Transcript Fetched Successfully.
+>>> Generating Summary (~100 words) with Ollama Llama 3...
+
+✅ FINAL SUMMARY:
+The video critiques the widespread use of economic and game-theory metaphors, particularly the "marketplace of ideas" and the Prisoner's Dilemma, in understanding human decision-making. It argues that these frameworks oversimplify complex social interactions and prioritize individual gain over collective well-being. The speaker suggests that this has led to a toxic emphasis on selfishness and competition, embodied by neoliberalism, which has gutted public services and prioritized wealth accumulation. They contend that people's decisions are often driven by factors beyond self-interest, such as social norms, empathy, and a desire for cooperation. The video concludes that these economic and game-theory models have had a profound impact on how we think about politics, policy, and human relationships, but are ultimately flawed and misguided.
+
+======================================================================
+
+--- Test Case 3: Processing URL: https://www.youtube.com/watch?v=non_existent_video_id ---
+An unexpected error occurred while fetching transcript for ID 'non_existent_video_id':
+Could not retrieve a transcript for the video https://www.youtube.com/watch?v=non_existent_video_id! This is most likely caused by:
+
+The video is no longer available
+
+If you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!
+
+❌ FAILED to retrieve transcript. Cannot generate summary.
+
+======================================================================
+
+--- Test Complete ---
