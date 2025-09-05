@@ -1,0 +1,99 @@
+--- Test Case 1 ---
+  Input Title: "US attacks blow back, uniting China, India, Russia, Iran; encouraging dedollarization"
+  Input Source: "Geopolitical Economy Report"
+  => LLM Output Category: Global
+
+--- Test Case 2 ---
+  Input Title: "Inside BRICS' Push for AI Independence"
+  Input Source: "Think BRICS - YouTube"
+  => LLM Output Category: Global
+
+--- Test Case 3 ---
+  Input Title: "Putin: Russia and China are united in our vision of building a just, multipolar world order"
+  Input Source: "Friends of Socialist China"
+  => LLM Output Category: Global
+
+--- Test Case 4 ---
+  Input Title: "Xi, Modi & Putin Present a United Front: SCO Summit Review"
+  Input Source: "The China-Global South Project"
+  => LLM Output Category: Global
+
+--- Test Case 5 ---
+  Input Title: "The message of the Victory Day parade: justice will prevail, peace will prevail and the people will prevail"
+  Input Source: "Friends of Socialist China"
+  => LLM Output Category: Unknown
+
+--- Test Case 6 ---
+  Input Title: "What is behind China’s successful leadership in tackling the climate crisis?"
+  Input Source: "Friends of Socialist China"
+  => LLM Output Category: China
+
+--- Test Case 7 ---
+  Input Title: "China and DPRK jointly celebrate the 80th anniversary of victory over Japanese imperialism"
+  Input Source: "Friends of Socialist China"
+  => LLM Output Category: East Asia
+
+--- Test Case 8 ---
+  Input Title: "China Challenges Japan Over Billions Spent to Rewrite Its “Comfort Women” History"
+  Input Source: "The China Academy"
+  => LLM Output Category: East Asia
+
+--- Test Case 9 ---
+  Input Title: "History will likely be harsh in its judgement of Israel's actions in Gaza: Shanmugam"
+  Input Source: "Channel News Asia"
+  => LLM Output Category: West Asia (Middle East)
+
+--- Test Case 10 ---
+  Input Title: "Singapore unveils initiatives to help workers become AI bilinguals"
+  Input Source: "Channel News Asia"
+  => LLM Output Category: Singapore
+
+--- Test Case 11 ---
+  Input Title: "In Philippines, Indigenous peoples and advocates launch Defend Mindoro campaign against state abuses"
+  Input Source: "Progressive International"
+  => LLM Output Category: Southeast Asia
+
+--- Test Case 12 ---
+  Input Title: "What’s fuelling protests in Indonesia and why now?"
+  Input Source: "South China Morning Post"
+  => LLM Output Category: Southeast Asia
+
+--- Test Case 13 ---
+  Input Title: "Friendship with Pakistan is cornerstone of China’s regional diplomacy"
+  Input Source: "Friends of Socialist China"
+  => LLM Output Category: South Asia
+
+--- Test Case 14 ---
+  Input Title: "Why Putin Made Zelensky an Offer, Knowing It Would Be Rejected"
+  Input Source: "The China Academy"
+  => LLM Output Category: Global
+
+--- Test Case 15 ---
+  Input Title: "Journalist: Israel Killed My Colleagues and Reuters Justified It — So I Quit."
+  Input Source: "Breakthrough News"
+  => LLM Output Category: West Asia (Middle East)
+
+--- Test Case 16 ---
+  Input Title: "Settler Violence in the West Bank: Daily Attacks and Israel’s Annexation Plans"
+  Input Source: "Middle East Eye"
+  => LLM Output Category: West Asia (Middle East)
+
+--- Test Case 17 ---
+  Input Title: "‘US Propaganda Against China Is Not Working in Africa’ w/ Zambia’s Dr. Fred M’membe"
+  Input Source: "Breakthrough News"
+  => LLM Output Category: Global
+
+--- Test Case 18 ---
+  Input Title: "Why Jeremy Corbyn’s New Left-Wing Party Is Shaking Britain w/ Dr. Ashok Kumar"
+  Input Source: "Breakthrough News"
+  => LLM Output Category: Europe
+
+--- Test Case 19 ---
+  Input Title: "How President AMLO’s Policies Lifted 13.4 Million Mexicans Out of Poverty"
+  Input Source: "Breakthrough News"
+  => LLM Output Category: Latin America & Caribbean
+
+--- Test Case 20 ---
+  Input Title: "Trump’s Police State: Why Aren’t Democrats Stopping Him?"
+  Input Source: "Breakthrough News"
+  => LLM Output Category: North America
