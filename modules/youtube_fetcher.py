@@ -1,6 +1,5 @@
 import re
 import logging
-import pandas as pd
 from datetime import datetime, timedelta, timezone
 from dateutil import parser as date_parser
 from googleapiclient.errors import HttpError
@@ -55,9 +54,9 @@ def fetch_youtube_video_data(
     youtube_service,
     max_results: int = 50,
     weeks_ago: int = 1,
-) -> pd.DataFrame:
+) -> list[dict]:
     """
-    Fetches recent videos from a YouTube channel and returns them as a DataFrame.
+    Fetches recent videos from a YouTube channel and returns them as a list of dictionaries.
 
     This is the primary callable function of the module. It checks that the
     source format is 'youtube' before processing.
@@ -72,20 +71,18 @@ def fetch_youtube_video_data(
                          Defaults to 1.
 
     Returns:
-        pd.DataFrame: A DataFrame containing video data with columns:
-                      ['source', 'type', 'format', 'title', 'url', 'region'].
-                      Returns an empty DataFrame if no videos are found or an error occurs.
+        list[dict]: A list of dictionaries, where each dictionary represents a video.
+                    Each dictionary contains keys: 'source', 'type', 'format',
+                    'title', 'url', 'raw_date', and 'region'. Returns an empty
+                    list if no videos are found or an error occurs.
     """
-    # Define the expected columns for the output DataFrame
-    output_columns = ["source", "type", "format", "title", "url", "region"]
-
     # This guard clause ensures we only process YouTube sources with this function.
     if source.get("format") != "youtube":
         logging.warning(
             f"Source '{source['name']}' has format '{source.get('format')}' and will be skipped. "
             "Only 'youtube' format is supported by this function."
         )
-        return pd.DataFrame(columns=output_columns)
+        return []
 
     video_data_list = []
     cutoff_date = datetime.now(timezone.utc) - timedelta(weeks=weeks_ago)
@@ -93,7 +90,7 @@ def fetch_youtube_video_data(
     try:
         channel_id = _get_channel_id_from_url(source["url"], youtube_service)
         if not channel_id:
-            return pd.DataFrame(columns=output_columns)
+            return []
 
         channel_response = (
             youtube_service.channels()
@@ -104,7 +101,7 @@ def fetch_youtube_video_data(
             logging.warning(
                 f"Could not find YouTube channel details for ID: {channel_id}"
             )
-            return pd.DataFrame(columns=output_columns)
+            return []
 
         uploads_playlist_id = channel_response["items"][0]["contentDetails"][
             "relatedPlaylists"
@@ -130,10 +127,10 @@ def fetch_youtube_video_data(
                     {
                         "source": source["name"],
                         "type": source["type"],
-                        "format": source["format"],  # --- New: Added format column ---
+                        "format": source["format"],
                         "title": snippet["title"],
                         "url": f"https://www.youtube.com/watch?v={video_id}",
-                        "region": "",
+                        "raw_date": snippet["publishedAt"],
                     }
                 )
 
@@ -150,10 +147,4 @@ def fetch_youtube_video_data(
             f"An unexpected error occurred for source '{source['name']}': {e}"
         )
 
-    if not video_data_list:
-        return pd.DataFrame(columns=output_columns)
-
-    df = pd.DataFrame(video_data_list)
-
-    # Ensure the column order is exactly as requested
-    return df[output_columns]
+    return video_data_list

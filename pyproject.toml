@@ -21,7 +21,8 @@ dependencies = [
     "langchain-core (>=0.3.75,<0.4.0)",
     "youtube-transcript-api (>=1.2.2,<2.0.0)",
     "pyyaml (>=6.0.2,<7.0.0)",
-    "pandas (>=2.3.2,<3.0.0)"
+    "pandas (>=2.3.2,<3.0.0)",
+    "langchain-ollama (>=0.3.7,<0.4.0)"
 ]
 
 [tool.poetry.group.dev.dependencies]
