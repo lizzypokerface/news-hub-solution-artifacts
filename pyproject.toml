@@ -19,7 +19,8 @@ dependencies = [
     "langchain-community (>=0.3.29,<0.4.0)",
     "webdriver-manager (>=4.0.2,<5.0.0)",
     "langchain-core (>=0.3.75,<0.4.0)",
-    "youtube-transcript-api (>=1.2.2,<2.0.0)"
+    "youtube-transcript-api (>=1.2.2,<2.0.0)",
+    "pyyaml (>=6.0.2,<7.0.0)"
 ]
 
 [tool.poetry.group.dev.dependencies]

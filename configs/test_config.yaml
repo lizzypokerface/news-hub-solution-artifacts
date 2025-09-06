@@ -1,0 +1,63 @@
+# API keys for external services
+api_keys:
+  # Required: Your key for the YouTube Data API
+  youtube_api: "AIzaSyBAmGmUB5hQh9FO-DxFwLyVznT_QFxDsK0"
+
+# Path where the output files will be saved.
+# The folder should exist.
+output_directory: "outputs/"
+
+# List of content sources.
+# 'type' must be either 'analysis' or 'datapoint'.
+# 'format' must be either 'youtube' or 'webpage'.
+sources:
+  - name: "Breakthrough News"
+    url: "https://www.youtube.com/@BreakThroughNews"
+    type: "analysis"
+    format: "youtube"
+  - name: "The Socialist Program"
+    url: "https://www.patreon.com/collection/877189?view=condensed"
+    type: "analysis"
+    format: "webpage"
+  - name: "Michael Robets Blog"
+    url: "https://thenextrecession.wordpress.com/blog"
+    type: "analysis"
+    format: "webpage"
+  - name: "Tricontinental - Newsletters"
+    url: "https://thetricontinental.org/newsletter/"
+    type: "analysis"
+    format: "webpage"
+  - name: "Progressive International"
+    url: "https://progressive.international"
+    type: "analysis"
+    format: "webpage"
+  - name: "Tarik Cyril Amar"
+    url: "https://tarikcyrilamar.substack.com/archive"
+    type: "analysis"
+    format: "webpage"
+
+  # ------ Mainstream Sources ------
+  - name: "TeleSUR English"
+    url: "https://www.youtube.com/@telesurenglish"
+    type: "datapoint"
+    format: "youtube"
+  - name: "Middle East Eye"
+    url: "https://www.youtube.com/@MiddleEastEye"
+    type: "datapoint"
+    format: "youtube"
+  - name: "Al Jazeera English"
+    url: "https://www.youtube.com/@aljazeeraenglish"
+    type: "datapoint"
+    format: "youtube"
+  - name: "Channel News Asia"
+    url: "https://www.youtube.com/@channelnewsasia"
+    type: "datapoint"
+    format: "youtube"
+  - name: "CGTN"
+    url: "https://www.youtube.com/@cgtn"
+    type: "datapoint"
+    format: "youtube"
+  - name: "Democracy Now!"
+    url: "https://www.youtube.com/@DemocracyNow"
+    type: "datapoint"
+    format: "youtube"
