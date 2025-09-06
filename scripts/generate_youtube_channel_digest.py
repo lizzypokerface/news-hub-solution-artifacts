@@ -34,7 +34,7 @@ except ImportError as e:
     sys.exit(1)
 
 
-# --- Part 1: Fetching YouTube Videos (Adapted from info.txt) ---
+# --- Part 1: Fetching YouTube Video Titles ---
 
 
 def _get_channel_id_from_url(url, youtube_service):
@@ -79,7 +79,6 @@ def fetch_recent_youtube_videos(source, youtube_service):
             .execute()
         )
         if not channel_response.get("items"):
-            print(f"    -  Could not find channel details for ID: {channel_id}")
             return []
 
         uploads_playlist_id = channel_response["items"][0]["contentDetails"][
@@ -95,43 +94,37 @@ def fetch_recent_youtube_videos(source, youtube_service):
         for item in playlist_items.get("items", []):
             snippet = item["snippet"]
             published_date = date_parser.isoparse(snippet["publishedAt"])
-
             if published_date >= one_week_ago:
                 results.append(snippet["title"])
 
-        results.reverse()  # Sort by oldest first for a chronological list
+        results.reverse()
         return results
 
-    except HttpError as e:
-        print(f"    -  YouTube API error for '{source['name']}': {e}")
-    except Exception as e:
-        print(f"    -  An unexpected error occurred for '{source['name']}': {e}")
+    except (HttpError, Exception) as e:
+        print(f"    -  An error occurred for '{source['name']}': {e}")
     return []
 
 
-# --- Part 2: AI Summarization from Titles ---
+# --- Part 2: AI Synthesis of Events from Titles ---
 
 
-def create_commentary_from_titles(channel_name, titles, llm_chain):
+def synthesize_events_from_titles(channel_name, titles, llm_chain):
     """
-    Generates a weekly commentary by inferring themes from a list of video titles.
+    Generates a compact list of events by synthesizing a list of video titles.
     """
     if not titles:
-        return "No video titles were available to generate a commentary."
+        return "No video titles were available to synthesize."
 
-    # Format the list of titles into a clean, numbered string for the prompt
-    formatted_titles = "\n".join(f"{i + 1}. {title}" for i, title in enumerate(titles))
+    formatted_titles = "\n".join(f"- {title}" for title in titles)
 
     try:
-        print("    -> Sending title list to Ollama for analysis...")
+        print("    -> Sending title list to Ollama for synthesis...")
         result = llm_chain.invoke(
             {"channel_name": channel_name, "title_list": formatted_titles}
         )
         return result["text"].strip()
     except Exception as e:
-        return (
-            f"Commentary could not be generated. Error communicating with Ollama: {e}"
-        )
+        return f"Event synthesis failed. Error communicating with Ollama: {e}"
 
 
 # --- Main Execution Block ---
@@ -150,6 +143,10 @@ if __name__ == "__main__":
     # --- Define Channels to Analyze ---
     youtube_channels_to_process = [
         {
+            "name": "Al Jazeera English",
+            "url": "https://www.youtube.com/@aljazeeraenglish",
+        },
+        {
             "name": "Geopolitical Economy Report",
             "url": "https://www.youtube.com/@GeopoliticalEconomyReport",
         },
@@ -157,30 +154,32 @@ if __name__ == "__main__":
             "name": "BreakThrough News",
             "url": "https://www.youtube.com/@BreakThroughNews",
         },
-        {
-            "name": "Al Jazeera English",
-            "url": "https://www.youtube.com/@aljazeeraenglish",
-        },
     ]
 
-    print("--- Initializing Services for Weekly YouTube Digest from Titles ---")
+    print("--- Initializing Services for YouTube Event Synthesis ---")
 
     # --- Initialize API and AI Services ---
     try:
         youtube_service = build("youtube", "v3", developerKey=API_KEY)
 
-        # This new prompt is specifically designed to work with titles only
+        # --- UPDATED PROMPT ---
+        # This prompt instructs the model to synthesize titles into a compact, comma-separated list of events.
         prompt_template = """
-You are a media analyst creating a weekly digest. Your task is to infer the main themes and narrative of a YouTube channel's content over the past week, based *only* on the list of video titles provided below.
+You are an information synthesizer. Your task is to analyze the following list of YouTube video titles and identify the distinct, ongoing events or topics they cover.
 
-Synthesize these titles into a coherent running commentary of about 100-150 words. Speculate on the overarching story or topics the channel focused on. Do not just list the titles; instead, tell the story that the titles suggest.
+From this list, extract the individual ongoing events. Each event must be presented as a short sentence or phrase of 10-15 words.
+
+Your final output must be a single, compact text block containing these short sentences, separated by commas. Do not use bullet points, numbering, or introductory text.
+
+EXAMPLE OUTPUT:
+Something happening in Libya, something happening in Somalia, continuation of problems in Africa, continuation of problems in America, transpacific trade deal something happening.
 
 CHANNEL NAME: {channel_name}
 
 VIDEO TITLES FROM THE PAST WEEK:
 {title_list}
 
-INFERRED WEEKLY COMMENTARY:
+COMPACT EVENT SUMMARY:
 """
         prompt = PromptTemplate(
             template=prompt_template, input_variables=["channel_name", "title_list"]
@@ -213,16 +212,18 @@ INFERRED WEEKLY COMMENTARY:
 
         print(f"    -> Found {len(video_titles)} recent video(s).")
 
-        # 2. Create weekly commentary from the list of titles
-        print("  - Step 2: Generating weekly commentary from titles...")
-        weekly_commentary = create_commentary_from_titles(
+        # 2. Synthesize events from the list of titles
+        print("  - Step 2: Synthesizing events from titles...")
+        event_summary = synthesize_events_from_titles(
             channel["name"], video_titles, llm_chain
         )
 
-        print("\n" + "=" * 25 + f" WEEKLY DIGEST for {channel['name']} " + "=" * 25)
-        print(weekly_commentary)
-        print("=" * (68 + len(channel["name"])), "\n")
+        print(
+            "\n" + "=" * 20 + f" SYNTHESIZED EVENTS for {channel['name']} " + "=" * 20
+        )
+        print(event_summary)
+        print("=" * (58 + len(channel["name"])), "\n")
 
-        time.sleep(1)  # Be respectful to the API
+        time.sleep(1)
 
     print("--- All Channels Processed ---")

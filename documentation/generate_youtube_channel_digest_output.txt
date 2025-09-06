@@ -1,55 +1,78 @@
 (venv) glenn@gl-aiml:~/projects/news-hub-solution-artifacts/scripts$ python generate_youtube_channel_digest.py
---- Initializing Services for Weekly YouTube Digest from Titles ---
-/home/glenn/projects/news-hub-solution-artifacts/scripts/generate_youtube_channel_digest.py:166: LangChainDeprecationWarning: The class `Ollama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import OllamaLLM``.
-  llm = Ollama(model="llama3.1")
-/home/glenn/projects/news-hub-solution-artifacts/scripts/generate_youtube_channel_digest.py:167: LangChainDeprecationWarning: The class `LLMChain` was deprecated in LangChain 0.1.17 and will be removed in 1.0. Use :meth:`~RunnableSequence, e.g., `prompt | llm`` instead.
+--- Initializing Services for YouTube Event Synthesis ---
+/home/glenn/projects/news-hub-solution-artifacts/scripts/generate_youtube_channel_digest.py:161: LangChainDeprecationWarning: The class `Ollama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import OllamaLLM``.
+  llm = Ollama(model="llama3")
+/home/glenn/projects/news-hub-solution-artifacts/scripts/generate_youtube_channel_digest.py:162: LangChainDeprecationWarning: The class `LLMChain` was deprecated in LangChain 0.1.17 and will be removed in 1.0. Use :meth:`~RunnableSequence, e.g., `prompt | llm`` instead.
   llm_chain = LLMChain(prompt=prompt, llm=llm)
 Initialization complete. Starting channel processing...
-
---- Processing Channel: Geopolitical Economy Report ---
-  - Step 1: Fetching recent video titles from the last 7 days...
-    -> Found 2 recent video(s).
-  - Step 2: Generating weekly commentary from titles...
-    -> Sending title list to Ollama for analysis...
-
-========================= WEEKLY DIGEST for Geopolitical Economy Report =========================
-The Geopolitical Economy Report has been sounding the alarm on a pivotal shift in global politics this week. According to their analysis, the US government's hypocritical stance on Latin America is backfiring, as its own actions are uniting major powers like China, India, Russia, and Iran against its interests. The US's reckless behavior, including supporting drug traffickers while threatening Venezuela, has created a perfect storm that is driving these nations towards economic independence from the US dollar.
-
-This narrative suggests that the channel sees a fundamental shift in the global balance of power, with the US losing influence and credibility on the world stage. The underlying theme appears to be one of resistance against US hegemony, as these countries band together to challenge American dominance and forge alternative paths for their economies. The tone is one of warning and analysis, cautioning that this trend has significant implications for global stability and economic order.
-===============================================================================================
-
---- Processing Channel: BreakThrough News ---
-  - Step 1: Fetching recent video titles from the last 7 days...
-    -> Found 34 recent video(s).
-  - Step 2: Generating weekly commentary from titles...
-    -> Sending title list to Ollama for analysis...
-
-========================= WEEKLY DIGEST for BreakThrough News =========================
-The past week's content from BreakThrough News suggests a channel deeply invested in amplifying the voices of marginalized communities and highlighting the struggles of occupied Palestine, particularly Gaza. The titles indicate a focus on exposing human rights abuses, government corruption, and the intersectionality of social justice movements.
-
-Videos 1-12 are dominated by coverage of the People's Conference for Palestine 2025, showcasing keynote speakers, panel discussions, and cultural performances that shed light on the ongoing struggle for Palestinian liberation. The channel's emphasis on documenting genocide, advocacy for an arms embargo, and medical capacity in Gaza underscores its commitment to shedding light on the humanitarian crisis.
-
-Other titles hint at the intersectionality of social justice movements, with references to Black Lives Matter (videos 13 and 14), LGBTQ+ rights (video 16), and anti-imperialist sentiments directed towards Israel and US foreign policy. Notable mentions include Epstein survivors speaking out against cover-ups and systemic injustices (videos 22-26) and critiques of Trump's authoritarian tendencies (videos 1, 21, and 33).
-
-The global context is also explored, with discussions on the Global Sumud Flotilla's mission to break Israel's siege on Gaza (video 13), US-China relations (video 24), and international responses to the humanitarian crisis in Palestine (videos 31-32). Overall, BreakThrough News presents itself as a platform that amplifies marginalized voices, challenges imperialist narratives, and advocates for collective action towards social change.
-=====================================================================================
 
 --- Processing Channel: Al Jazeera English ---
   - Step 1: Fetching recent video titles from the last 7 days...
     -> Found 50 recent video(s).
-  - Step 2: Generating weekly commentary from titles...
-    -> Sending title list to Ollama for analysis...
+  - Step 2: Synthesizing events from titles...
+    -> Sending title list to Ollama for synthesis...
 
-========================= WEEKLY DIGEST for Al Jazeera English =========================
-This week on Al Jazeera English, the focus has been squarely on the Middle East conflict, particularly the Israeli-Palestinian crisis in Gaza. The channel has covered the devastating consequences of Israel's military actions, including reports of civilian casualties, destruction of homes and infrastructure, and a growing humanitarian crisis. The videos also highlight the plight of displaced Palestinians, many of whom are struggling to access basic necessities like food and shelter.
+==================== SYNTHESIZED EVENTS for Al Jazeera English ====================
+Event synthesis failed. Error communicating with Ollama: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull llama3`.
+============================================================================
 
-The channel has also delved into the global response to the crisis, featuring commentary from experts and analysis on the implications of international involvement. Additionally, there have been reports on other conflicts in the region, such as the situation in Afghanistan following a major earthquake.
+--- Processing Channel: Geopolitical Economy Report ---
+  - Step 1: Fetching recent video titles from the last 7 days...
+    -> Found 2 recent video(s).
+  - Step 2: Synthesizing events from titles...
+    -> Sending title list to Ollama for synthesis...
 
-However, it's clear that Gaza is the primary focus of Al Jazeera English this week. The channel has shed light on the human cost of war, including personal stories of loss and resilience. Videos like "Returning to Tulkarem: Palestinians find Israeli army destroyed their homes" and "Palestinian boys shot in testicles as 'target practice'" serve as stark reminders of the conflict's devastating impact.
+==================== SYNTHESIZED EVENTS for Geopolitical Economy Report ====================
+Event synthesis failed. Error communicating with Ollama: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull llama3`.
+=====================================================================================
 
-The channel has also explored other international news stories, including Pakistan's flooding crisis, Australia's migrant resettlement deal, and US foreign policy decisions in Latin America. These reports demonstrate Al Jazeera English's commitment to providing comprehensive coverage of global events.
+--- Processing Channel: BreakThrough News ---
+  - Step 1: Fetching recent video titles from the last 7 days...
+    -> Found 33 recent video(s).
+  - Step 2: Synthesizing events from titles...
+    -> Sending title list to Ollama for synthesis...
 
-Throughout the week, there have been recurring themes of humanitarian crisis, conflict resolution, and the human cost of war. The channel has sought to provide context and analysis on these complex issues, offering viewers a nuanced understanding of the region's complexities.
-======================================================================================
+==================== SYNTHESIZED EVENTS for BreakThrough News ====================
+Event synthesis failed. Error communicating with Ollama: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull llama3`.
+===========================================================================
+
+--- All Channels Processed ---
+(venv) glenn@gl-aiml:~/projects/news-hub-solution-artifacts/scripts$ python generate_youtube_channel_digest.py
+--- Initializing Services for YouTube Event Synthesis ---
+/home/glenn/projects/news-hub-solution-artifacts/scripts/generate_youtube_channel_digest.py:161: LangChainDeprecationWarning: The class `Ollama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import OllamaLLM``.
+  llm = Ollama(model="llama3.1")
+/home/glenn/projects/news-hub-solution-artifacts/scripts/generate_youtube_channel_digest.py:162: LangChainDeprecationWarning: The class `LLMChain` was deprecated in LangChain 0.1.17 and will be removed in 1.0. Use :meth:`~RunnableSequence, e.g., `prompt | llm`` instead.
+  llm_chain = LLMChain(prompt=prompt, llm=llm)
+Initialization complete. Starting channel processing...
+
+--- Processing Channel: Al Jazeera English ---
+  - Step 1: Fetching recent video titles from the last 7 days...
+    -> Found 50 recent video(s).
+  - Step 2: Synthesizing events from titles...
+    -> Sending title list to Ollama for synthesis...
+
+==================== SYNTHESIZED EVENTS for Al Jazeera English ====================
+US military buildup in the Caribbean, ongoing flooding in Pakistan, earthquake aftermath in Afghanistan, escalating violence in Gaza, ongoing displacement of Palestinians, vaccination policies and mandates controversy in America, humanitarian crisis in Africa.
+============================================================================
+
+--- Processing Channel: Geopolitical Economy Report ---
+  - Step 1: Fetching recent video titles from the last 7 days...
+    -> Found 2 recent video(s).
+  - Step 2: Synthesizing events from titles...
+    -> Sending title list to Ollama for synthesis...
+
+==================== SYNTHESIZED EVENTS for Geopolitical Economy Report ====================
+US government supports drug traffickers in Latin America, Venezuela threatens, US attacks unite China India Russia Iran.
+=====================================================================================
+
+--- Processing Channel: BreakThrough News ---
+  - Step 1: Fetching recent video titles from the last 7 days...
+    -> Found 33 recent video(s).
+  - Step 2: Synthesizing events from titles...
+    -> Sending title list to Ollama for synthesis...
+
+==================== SYNTHESIZED EVENTS for BreakThrough News ====================
+People's Conference for Palestine 2025, Gaza humanitarian crisis ongoing, Palestinian struggle against Israeli occupation, US government role in Gaza genocide investigated, transphobic incident at Yosemite National Park, Black Chicagoans protest Trump's military takeover threat, US propaganda and media manipulation exposed, Epstein survivors speak out against abuse and cover-up, international community unites against US policies, historic summit between China, Russia, India, Iran.
+===========================================================================
 
 --- All Channels Processed ---
