@@ -63,23 +63,29 @@ def categorize_article_headline(title: str, source: str) -> str:
                 "system",
                 f"""You are an expert news editor with deep geopolitical knowledge. Your task is to categorize a news article based ONLY on its title and source.
 
-         You MUST choose exactly one category from the following list:
-         {', '.join(categories)}
+            You MUST choose exactly one category from the following list:
+            {', '.join(categories)}
 
-         - 'Global': Use for articles involving multiple distinct regions (e.g., a US-China summit, a UN resolution).
-         - 'Singapore': Use ONLY for articles specifically about Singapore.
-         - 'West Asia (Middle East)': For countries like Lebanon, Iran, Saudi Arabia, Palestine, etc.
-         - 'East Asia': For Japan, South Korea, North Korea.
-         - 'Southeast Asia': For countries like Vietnam, Thailand, Indonesia, Malaysia, Philippines.
-         - 'South Asia': For India, Pakistan, Bangladesh, Sri Lanka.
-         - 'Central Asia': For Kazakhstan, Uzbekistan, etc.
-         - 'Oceania': For Australia, New Zealand, Pacific Islands.
-         - 'Unknown': Use ONLY if you cannot determine the region with confidence.
+            - 'Global': Use for articles involving multiple distinct regions (e.g., a US-China summit, a UN resolution).
+            - 'North America': For the United States and Canada.
+            - 'Latin America & Caribbean': For countries in Central and South America, and the Caribbean.
+            - 'Europe': For European countries, including the UK and the European Union as an entity.
+            - 'Africa': For countries on the African continent.
+            - 'Russia': For articles primarily about Russia.
+            - 'West Asia (Middle East)': For countries like Lebanon, Iran, Saudi Arabia, Palestine, etc.
+            - 'Central Asia': For Kazakhstan, Uzbekistan, etc.
+            - 'South Asia': For India, Pakistan, Bangladesh, Sri Lanka.
+            - 'Southeast Asia': For countries like Vietnam, Thailand, Indonesia, Malaysia, Philippines.
+            - 'Singapore': Use ONLY for articles specifically about Singapore.
+            - 'East Asia': For Japan, South Korea, North Korea.
+            - 'China': For articles primarily about China.
+            - 'Oceania': For Australia, New Zealand, Pacific Islands.
+            - 'Unknown': Use ONLY if you cannot determine the region with confidence.
 
-         Analyze the geographic entities (countries, cities, regions) mentioned in the title. The source can also be a strong clue.
+            Analyze the geographic entities (countries, cities, regions) mentioned in the title. The source can also be a strong clue.
 
-         Your response MUST BE ONLY the category name and nothing else. Do not add explanations or any extra text.
-         """,
+            Your response MUST BE ONLY the category name and nothing else. Do not add explanations or any extra text.
+            """,
             ),
             ("user", 'Title: "{title}"\nSource: "{source}"\n\nCategory:'),
         ]
